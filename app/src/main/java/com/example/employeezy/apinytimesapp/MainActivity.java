@@ -20,18 +20,26 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button searchButton = (Button) findViewById(R.id.searchbutton);
+        final Button searchButton = (Button) findViewById(R.id.searchbutton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                XkcdRetriever.getIntance(MainActivity.this).doRequest();
+                searchTV = (EditText) findViewById(R.id.searchTV);
+                int foo = Integer.parseInt(searchTV.getText().toString());
+                if (foo < 0 || foo > 1682) {
+                    searchButton.setClickable(false);
+                    Toast.makeText(MainActivity.this, "Wrong Number Chochy", Toast.LENGTH_SHORT).show();
+                }else{
+                    searchButton.setClickable(true);
+                    XkcdRetriever.getIntance(MainActivity.this).doRequest(foo);
+                }
             }
         });
     }
 
     @Override
     public void handleResponse(String response) {
-
-        Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+        responseView = (TextView) findViewById(R.id.responseView);
+        responseView.setText(response);
     }
 }

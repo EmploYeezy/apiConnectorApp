@@ -33,18 +33,19 @@ public class XkcdRetriever {
         return intance;
     }
 
-    public void doRequest() {
+    public void doRequest(int urlNumber) {
+
         AsyncHttpClient client = new AsyncHttpClient();
 
-        String foo;
         client.get(
-                "http://xkcd.com/234/info.0.json",
+                "http://xkcd.com/" + urlNumber + "/info.0.json",
                 null,
                 new JsonHttpResponseHandler() {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
                         try {
                             responseHandler.handleResponse(response.getString("month"));
+                            responseHandler.handleResponse(response.getString("img"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
