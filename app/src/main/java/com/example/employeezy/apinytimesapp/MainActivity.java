@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         setContentView(R.layout.activity_main);
 
         final Button searchButton = (Button) findViewById(R.id.searchbutton);
+        assert searchButton != null;
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
                 if (foo <= 0 || foo > 1682) {
                     searchButton.setClickable(false);
                     Toast.makeText(MainActivity.this, "Wrong Number Chochy", Toast.LENGTH_SHORT).show();
+
                 }else{
                     searchButton.setClickable(true);
                     XkcdRetriever.getIntance(MainActivity.this).doRequest(foo);
@@ -47,6 +49,5 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
 //        responseView.setText(response);
         imageViewer = (ImageView) findViewById(R.id.imageViewer);
         Picasso.with(MainActivity.this).load(response).into(imageViewer);
-
     }
 }

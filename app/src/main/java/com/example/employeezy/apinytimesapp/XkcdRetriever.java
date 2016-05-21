@@ -1,7 +1,5 @@
 package com.example.employeezy.apinytimesapp;
 
-import android.widget.EditText;
-
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -15,9 +13,6 @@ import cz.msebera.android.httpclient.Header;
  */
 
 public class XkcdRetriever {
-
-   EditText searchValue;
-    String idNumber;
 
     private static XkcdRetriever intance;
     private static ApiResponseHandler responseHandler;
@@ -34,22 +29,18 @@ public class XkcdRetriever {
     }
 
     public void doRequest(int urlNumber) {
-
         AsyncHttpClient client = new AsyncHttpClient();
-
         client.get(
                 "http://xkcd.com/" + urlNumber + "/info.0.json",
                 null,
                 new JsonHttpResponseHandler() {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
                         try {
                             //responseHandler.handleResponse(response.getString("month"));
                             responseHandler.handleResponse(response.getString("img"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 });
     }
