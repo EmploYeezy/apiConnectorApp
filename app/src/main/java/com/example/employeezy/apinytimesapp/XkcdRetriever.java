@@ -44,7 +44,7 @@ public class XkcdRetriever {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
                         try {
-                            responseHandler.handleResponse(response.getString("month"));
+                            //responseHandler.handleResponse(response.getString("month"));
                             responseHandler.handleResponse(response.getString("img"));
                         } catch (JSONException e) {
                             e.printStackTrace();
