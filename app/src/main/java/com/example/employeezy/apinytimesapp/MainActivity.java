@@ -31,13 +31,13 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             public void onClick(View v) {
                 searchTV = (EditText) findViewById(R.id.searchTV);
                 int foo = Integer.parseInt(searchTV.getText().toString());
-                if (foo <= 0 || foo > 1682) {
+                if (foo <= 0 || foo > 1684) {
                     searchButton.setClickable(false);
                     Toast.makeText(MainActivity.this, "Wrong Number Chochy", Toast.LENGTH_SHORT).show();
 
                 }else{
                     searchButton.setClickable(true);
-                    XkcdRetriever.getIntance(MainActivity.this).doRequest(foo);
+                    XkcdRetriever.getInstance(MainActivity.this).doRequest(foo);
                 }
             }
         });

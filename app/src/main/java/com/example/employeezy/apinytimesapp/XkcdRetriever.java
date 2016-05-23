@@ -14,21 +14,20 @@ import cz.msebera.android.httpclient.Header;
 
 public class XkcdRetriever {
 
-    private static XkcdRetriever intance;
+    private static XkcdRetriever instance;
     private static ApiResponseHandler responseHandler;
 
-    private XkcdRetriever() {
-    }
+    private XkcdRetriever() {}
 
-    public static XkcdRetriever getIntance(ApiResponseHandler handler) {
+    public static XkcdRetriever getInstance(ApiResponseHandler handler) {
         responseHandler = handler;
-        if (intance == null) {
-            intance = new XkcdRetriever();
+        if (instance == null) {
+            instance = new XkcdRetriever();
         }
-        return intance;
+        return instance;
     }
 
-    public void doRequest(int urlNumber) {
+    public void doRequest(int urlNumber) { //int urlNumber refers to int foo passed as doRequest(foo) from Main;
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(
                 "http://xkcd.com/" + urlNumber + "/info.0.json",
