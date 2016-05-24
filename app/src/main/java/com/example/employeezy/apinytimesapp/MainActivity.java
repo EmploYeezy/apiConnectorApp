@@ -49,9 +49,16 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             });
         }
 
+    /////--------: These two things get bits of info from XkcdRetriever.java JSON and bring it to this activity :--------\\\\\
     @Override
     public void handleResponse(String response) {
         imageViewer = (ImageView) findViewById(R.id.imageViewer);
+        imageViewer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, altText, Toast.LENGTH_LONG).show();
+            }
+        });
         Picasso.with(MainActivity.this).load(response).into(imageViewer);
     }
     @Override
@@ -59,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         altText = responseAlt;
     }
 
-    /////--------: This whole block of code just makes sure that the comic is displayed well :-------\\\\\
+    /////--------: This whole block of code just makes sure that the comic is displayed well: --------\\\\\
     @Override
     public void onConfigurationChanged (Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -69,12 +76,6 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             imageViewer.setAdjustViewBounds(true);
             searchTV.setVisibility(View.INVISIBLE);
             searchButton.setVisibility(View.INVISIBLE);
-            imageViewer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(MainActivity.this, altText, Toast.LENGTH_LONG).show();
-                }
-            });
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             Log.e("On Config change", "PORTRAIT");
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageViewer.getLayoutParams();
@@ -85,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             searchTV.setText("");
             searchTV.setHint("Would you like another? Enter 1 - 1684");
             imageViewer.setAdjustViewBounds(true);
-            imageViewer.setClickable(false);
         }
     }
 }
