@@ -16,7 +16,7 @@
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter a number from 1 to 1684"/>
+        android:hint="@string/searchTVHint"/>
 
     <Button
         android:id="@+id/searchbutton"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:text="search"/>
+        android:text="@string/searchButtonText"/>
 
     <ImageView
         android:id="@+id/imageViewer"

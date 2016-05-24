@@ -38,13 +38,12 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
                     if (query.isEmpty()) return; //null pointer fixer
                     int foo = Integer.parseInt(query);
                     if (foo <= 0 || foo > 1684) {
-                        Toast.makeText(MainActivity.this, "Wrong Number Chochy", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, R.string.mockingToast, Toast.LENGTH_SHORT).show();
                     } else {
                         searchButton.setClickable(true);
                         XkcdRetriever.getInstance(MainActivity.this).doRequest(foo);
                         searchTV.setText("");
-                        searchTV.setHint("Would you like another? Enter 1 - 1684");
-                    }
+                        searchTV.setHint(R.string.secondaryHint);                    }
                 }
             });
         }
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             searchTV.setVisibility(View.VISIBLE);
             searchButton.setVisibility(View.VISIBLE);
             searchTV.setText("");
-            searchTV.setHint("Would you like another? Enter 1 - 1684");
+            searchTV.setHint(R.string.secondaryHint);
             imageViewer.setAdjustViewBounds(true);
         }
     }
