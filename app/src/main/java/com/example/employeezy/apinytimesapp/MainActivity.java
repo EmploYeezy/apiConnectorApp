@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +23,14 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
     EditText searchTV;
     ProgressBar progressBar;
     ImageView imageViewer;
+    Button searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            final Button searchButton = (Button) findViewById(R.id.searchbutton);
+            searchButton = (Button) findViewById(R.id.searchbutton);
             assert searchButton != null;
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -54,10 +56,15 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Log.e("On Config Change", "LANDSCAPE");
+            imageViewer.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+            imageViewer.setAdjustViewBounds(true);
+            searchTV.setVisibility(View.INVISIBLE);
+            searchButton.setVisibility(View.INVISIBLE);
         } else {
             Log.e("On Config change", "PORTRAIT");
+            searchTV.setVisibility(View.VISIBLE);
+            searchButton.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
