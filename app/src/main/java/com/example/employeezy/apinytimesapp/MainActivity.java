@@ -28,16 +28,16 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         setContentView(R.layout.activity_main);
 
             searchButton = (Button) findViewById(R.id.searchbutton);
-            assert searchButton != null;
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     searchTV = (EditText) findViewById(R.id.searchTV);
-                    int foo = Integer.parseInt(searchTV.getText().toString());
+                    String query = searchTV.getText().toString();
+                    if (query.isEmpty()) return;
+                    int foo = Integer.parseInt(query);
                     if (foo <= 0 || foo > 1684) {
-                        searchButton.setClickable(false);
                         Toast.makeText(MainActivity.this, "Wrong Number Chochy", Toast.LENGTH_SHORT).show();
                     } else {
                         searchButton.setClickable(true);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         altText = responseAlt;
     }
 
-    /////--------: This whole block of code just makes sure that the comic is displayed well: --------\\\\\
+    /////--------: This whole block of code just makes sure that the comic is displayed well :--------\\\\\
     @Override
     public void onConfigurationChanged (Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
