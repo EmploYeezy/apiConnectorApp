@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     searchTV = (EditText) findViewById(R.id.searchTV);
-                    String query = searchTV.getText().toString();
-                    if (query.isEmpty()) return;
+                    String query = searchTV.getText().toString(); //this line and the next line is a null pointer fixer
+                    if (query.isEmpty()) return; //null pointer fixer
                     int foo = Integer.parseInt(query);
                     if (foo <= 0 || foo > 1684) {
                         Toast.makeText(MainActivity.this, "Wrong Number Chochy", Toast.LENGTH_SHORT).show();
