@@ -27,7 +27,7 @@ public class XkcdRetriever {
         return instance;
     }
 
-    public void doRequest(int urlNumber) { //int urlNumber refers to int foo passed as doRequest(foo) from Main;
+    public void doRequest(int urlNumber) { //int urlNumber refers to int foo passed as doRequest(foo) from Main.
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(
                 "http://xkcd.com/" + urlNumber + "/info.0.json",
@@ -35,7 +35,7 @@ public class XkcdRetriever {
                 new JsonHttpResponseHandler() {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
-                            //responseHandler.handleResponse(response.getString("month"));
+                            responseHandler.handleResponseAlt(response.getString("alt"));
                             responseHandler.handleResponse(response.getString("img"));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -46,5 +46,6 @@ public class XkcdRetriever {
 
     public interface ApiResponseHandler {
         void handleResponse(String response);
+        void handleResponseAlt(String response);
     }
 }

@@ -53,7 +53,12 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         imageViewer = (ImageView) findViewById(R.id.imageViewer);
         Picasso.with(MainActivity.this).load(response).into(imageViewer);
     }
+    @Override
+    public void handleResponseAlt(String response) {
+        Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+    }
 
+    /////--------: This whole block of code just makes sure that the comic is displayed well :-------\\\\\
     @Override
     public void onConfigurationChanged (Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -67,13 +72,12 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             Log.e("On Config change", "PORTRAIT");
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageViewer.getLayoutParams();
             params.addRule(RelativeLayout.BELOW, R.id.searchbutton);
-            params.setMargins(45,45,45,45); // left, top, right, bottom
+            params.setMargins(45,45,45,45); // padding for left, top, right, bottom
             searchTV.setVisibility(View.VISIBLE);
             searchButton.setVisibility(View.VISIBLE);
             searchTV.setText("");
             searchTV.setHint("Would you like another? Enter 1 - 1684");
             imageViewer.setAdjustViewBounds(true);
-
         }
     }
 }
