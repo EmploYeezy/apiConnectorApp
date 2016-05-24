@@ -42,14 +42,23 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
                     if (foo <= 0 || foo > 1684) {
                         searchButton.setClickable(false);
                         Toast.makeText(MainActivity.this, "Wrong Number Chochy", Toast.LENGTH_SHORT).show();
-
                     } else {
                         searchButton.setClickable(true);
                         XkcdRetriever.getInstance(MainActivity.this).doRequest(foo);
+                        searchTV.setText("");
+                        searchTV.setHint("Would you like another? Enter 1 - 1684");
                     }
                 }
             });
         }
+
+    @Override
+    public void handleResponse(String response) {
+//        responseView = (TextView) findViewById(R.id.responseView);
+//        responseView.setText(response);
+        imageViewer = (ImageView) findViewById(R.id.imageViewer);
+        Picasso.with(MainActivity.this).load(response).into(imageViewer);
+    }
 
     @Override
     public void onConfigurationChanged (Configuration newConfig) {
@@ -60,18 +69,21 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             imageViewer.setAdjustViewBounds(true);
             searchTV.setVisibility(View.INVISIBLE);
             searchButton.setVisibility(View.INVISIBLE);
-        } else {
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             Log.e("On Config change", "PORTRAIT");
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageViewer.getLayoutParams();
+            params.addRule(RelativeLayout.BELOW, R.id.searchbutton);
+            params.setMargins(45,45,45,45); // left, top, right, bottom
             searchTV.setVisibility(View.VISIBLE);
             searchButton.setVisibility(View.VISIBLE);
+            searchTV.setText("");
+            searchTV.setHint("Would you like another? Enter 1 - 1684");
+            imageViewer.setAdjustViewBounds(true);
+
         }
     }
 
-    @Override
-    public void handleResponse(String response) {
-//        responseView = (TextView) findViewById(R.id.responseView);
-//        responseView.setText(response);
-        imageViewer = (ImageView) findViewById(R.id.imageViewer);
-        Picasso.with(MainActivity.this).load(response).into(imageViewer);
-    }
+
+
+
 }
