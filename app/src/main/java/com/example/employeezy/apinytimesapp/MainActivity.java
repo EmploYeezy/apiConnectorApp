@@ -10,18 +10,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements XkcdRetriever.ApiResponseHandler{
 
-    TextView responseView;
     EditText searchTV;
-    ProgressBar progressBar;
     ImageView imageViewer;
     Button searchButton;
 
@@ -54,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
 
     @Override
     public void handleResponse(String response) {
-//        responseView = (TextView) findViewById(R.id.responseView);
-//        responseView.setText(response);
         imageViewer = (ImageView) findViewById(R.id.imageViewer);
         Picasso.with(MainActivity.this).load(response).into(imageViewer);
     }
@@ -82,8 +76,4 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
 
         }
     }
-
-
-
-
 }
