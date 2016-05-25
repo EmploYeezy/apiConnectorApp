@@ -36,7 +36,7 @@ public class XkcdRetriever {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
                             responseHandler.handleResponseAlt(response.getString("alt"));
-                            responseHandler.handleResponse(response.getString("img"));
+                            responseHandler.handleResponseImg(response.getString("img"));
                             responseHandler.handleResponseNum(response.getString("num"));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -47,7 +47,7 @@ public class XkcdRetriever {
 
     public interface ApiResponseHandler {
         void handleResponseAlt(String response);
-        void handleResponse(String response);
+        void handleResponseImg(String response);
         void handleResponseNum(String response);
     }
 }

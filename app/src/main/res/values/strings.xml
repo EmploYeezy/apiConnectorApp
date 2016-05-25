@@ -7,4 +7,6 @@
     <string name="mockingToast">Wrong Number Chochy</string>
     <string name="prevButton">Prev</string>
     <string name="nextButton">next</string>
+    <string name="nextButtonToast">Too Big!</string>
+    <string name="prevButtonToast">Too Low!</string>
 </resources>

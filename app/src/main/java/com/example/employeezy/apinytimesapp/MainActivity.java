@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
     int foo;
     int bar1;
     int bar2;
+    int bar3;
     private String number;
 
     @Override
@@ -67,10 +68,11 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
     public void handleResponseNum(String responseNum) {
         number = responseNum;
         currentNumber.setText(number);
+        bar3 = Integer.parseInt(number);
     }
 
     @Override
-    public void handleResponse(String response) {
+    public void handleResponseImg(String response) {
         imageViewer = (ImageView) findViewById(R.id.imageViewer);
         imageViewer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,16 +84,24 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bar1 = foo -1;
-                XkcdRetriever.getInstance(MainActivity.this).doRequest(bar1);
+                bar1 = bar3 -1;
+                if (bar1 <= 0) {
+                    Toast.makeText(MainActivity.this, R.string.prevButtonToast, Toast.LENGTH_SHORT).show();
+                } else {
+                    XkcdRetriever.getInstance(MainActivity.this).doRequest(bar1);
+                }
             }
         });
         nextButton.setVisibility(View.VISIBLE);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bar2 = foo +1;
-                XkcdRetriever.getInstance(MainActivity.this).doRequest(bar2);
+                bar2 = bar3 +1;
+                if (bar2 > 1684){
+                    Toast.makeText(MainActivity.this, R.string.nextButtonToast, Toast.LENGTH_SHORT).show();
+                } else {
+                    XkcdRetriever.getInstance(MainActivity.this).doRequest(bar2);
+                }
             }
         });
         Picasso.with(MainActivity.this).load(response).into(imageViewer);
@@ -113,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             searchButton.setVisibility(View.INVISIBLE);
             prevButton.setVisibility(View.INVISIBLE);
             nextButton.setVisibility(View.INVISIBLE);
+            currentNumber.setVisibility(View.INVISIBLE);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             Log.e("On Config change", "PORTRAIT");
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageViewer.getLayoutParams();
@@ -122,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             searchButton.setVisibility(View.VISIBLE);
             prevButton.setVisibility(View.VISIBLE);
             nextButton.setVisibility(View.VISIBLE);
+            currentNumber.setVisibility(View.VISIBLE);
             searchTV.setText("");
             searchTV.setHint(R.string.secondaryHint);
             imageViewer.setAdjustViewBounds(true);
