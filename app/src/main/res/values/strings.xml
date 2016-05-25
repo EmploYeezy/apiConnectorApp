@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">ApiNytimesApp</string>
     <string name="action_settings">Settings</string>
-    <string name="searchTVHint">Enter a number from 1 to 1684</string>
+    <string name="searchTVHint">Enter a number from 1 to </string>
     <string name="searchButtonText">search</string>
-    <string name="secondaryHint">Would you like another? Enter 1 - 1684</string>
     <string name="mockingToast">Wrong Number Chochy</string>
     <string name="prevButton">Prev</string>
     <string name="nextButton">next</string>

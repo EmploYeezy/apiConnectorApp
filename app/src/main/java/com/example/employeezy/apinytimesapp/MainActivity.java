@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
     int bar1;
     int bar2;
     int bar3;
+    int bar4;
+    int counter;
+    private String biggestNumber;
     private String altText;
     EditText searchTV;
     ImageView imageViewer;
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        searchTV = (EditText) findViewById(R.id.searchTV);
+        XkcdRetriever.getInstance(MainActivity.this).homeRequest();
 
             prevButton = (Button) findViewById(R.id.prevButton);
             prevButton.setVisibility(View.INVISIBLE);
@@ -47,16 +52,15 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
                 public void onClick(View v) {
                     InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    searchTV = (EditText) findViewById(R.id.searchTV);
                     String query = searchTV.getText().toString(); //this line and the next line is a null pointer fixer
                     if (query.isEmpty()) return; //null pointer fixer
                     foo = Integer.parseInt(query);
-                    if (foo <= 0 || foo > 1684) {
+                    if (foo <= 0 || foo > bar4) {
                         Toast.makeText(MainActivity.this, R.string.mockingToast, Toast.LENGTH_SHORT).show();
                     } else {
                         XkcdRetriever.getInstance(MainActivity.this).doRequest(foo);
                         searchTV.setText("");
-                        searchTV.setHint(R.string.secondaryHint);
+                        searchTV.setHint("Enter a number from 1 to " + bar4);
                     }
                 }
             });
@@ -67,8 +71,12 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         currentNumber.setText(responseNum);
         currentNumber.setClickable(false);
         bar3 = Integer.parseInt(responseNum);
+        counter++;
+        if (counter == 1){
+            bar4 = bar3;
+        }
+        searchTV.setHint("Enter a number from 1 to " + bar4);
     }
-
     @Override
     public void handleResponseImg(String response) {
         imageViewer = (ImageView) findViewById(R.id.imageViewer);
@@ -95,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             @Override
             public void onClick(View v) {
                 bar2 = bar3 +1;
-                if (bar2 > 1684){
+                if (bar2 > bar4){
                     Toast.makeText(MainActivity.this, R.string.nextButtonToast, Toast.LENGTH_SHORT).show();
                 } else {
                     XkcdRetriever.getInstance(MainActivity.this).doRequest(bar2);
@@ -133,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             nextButton.setVisibility(View.VISIBLE);
             currentNumber.setVisibility(View.VISIBLE);
             searchTV.setText("");
-            searchTV.setHint(R.string.secondaryHint);
+            searchTV.setHint("Enter a number from 1 to " + biggestNumber);
             imageViewer.setAdjustViewBounds(true);
         }
     }

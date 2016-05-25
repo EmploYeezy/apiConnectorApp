@@ -27,6 +27,24 @@ public class XkcdRetriever {
         return instance;
     }
 
+    public void homeRequest() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get (
+                "http://xkcd.com/info.0.json",
+                null,
+                new JsonHttpResponseHandler() {
+                    public void onSuccess(int statusCode, Header [] headers, JSONObject response) {
+                        try {
+                            responseHandler.handleResponseAlt(response.getString("alt"));
+                            responseHandler.handleResponseImg(response.getString("img"));
+                            responseHandler.handleResponseNum(response.getString("num"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
     public void doRequest(int urlNumber) { //int urlNumber refers to int foo passed as doRequest(foo) from Main.
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(
