@@ -18,18 +18,17 @@ import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements XkcdRetriever.ApiResponseHandler{
 
+    int foo;
+    int bar1;
+    int bar2;
+    int bar3;
+    private String altText;
     EditText searchTV;
     ImageView imageViewer;
     Button searchButton;
     Button prevButton;
     Button nextButton;
     TextView currentNumber;
-    private String altText;
-    int foo;
-    int bar1;
-    int bar2;
-    int bar3;
-    private String number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             nextButton = (Button) findViewById(R.id.nextButton);
             nextButton.setVisibility(View.INVISIBLE);
             currentNumber = (TextView) findViewById(R.id.currentNumber);
-
 
         searchButton = (Button) findViewById(R.id.searchbutton);
             searchButton.setOnClickListener(new View.OnClickListener() {
@@ -64,11 +62,11 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             });
         }
 
-    /////--------: These two things get bits of info from XkcdRetriever.java JSON and bring it to this activity :--------\\\\\
+    /////--------: These Three handlers get bits of JSON from XkcdRetriever.java and bring it to this activity :--------\\\\\
     public void handleResponseNum(String responseNum) {
-        number = responseNum;
-        currentNumber.setText(number);
-        bar3 = Integer.parseInt(number);
+        currentNumber.setText(responseNum);
+        currentNumber.setClickable(false);
+        bar3 = Integer.parseInt(responseNum);
     }
 
     @Override
