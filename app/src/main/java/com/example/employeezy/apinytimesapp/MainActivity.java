@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -20,14 +21,28 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
     EditText searchTV;
     ImageView imageViewer;
     Button searchButton;
+    Button prevButton;
+    Button nextButton;
+    TextView currentNumber;
     private String altText;
+    int foo;
+    int bar1;
+    int bar2;
+    private String number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            searchButton = (Button) findViewById(R.id.searchbutton);
+            prevButton = (Button) findViewById(R.id.prevButton);
+            prevButton.setVisibility(View.INVISIBLE);
+            nextButton = (Button) findViewById(R.id.nextButton);
+            nextButton.setVisibility(View.INVISIBLE);
+            currentNumber = (TextView) findViewById(R.id.currentNumber);
+
+
+        searchButton = (Button) findViewById(R.id.searchbutton);
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -36,19 +51,24 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
                     searchTV = (EditText) findViewById(R.id.searchTV);
                     String query = searchTV.getText().toString(); //this line and the next line is a null pointer fixer
                     if (query.isEmpty()) return; //null pointer fixer
-                    int foo = Integer.parseInt(query);
+                    foo = Integer.parseInt(query);
                     if (foo <= 0 || foo > 1684) {
                         Toast.makeText(MainActivity.this, R.string.mockingToast, Toast.LENGTH_SHORT).show();
                     } else {
-                        searchButton.setClickable(true);
                         XkcdRetriever.getInstance(MainActivity.this).doRequest(foo);
                         searchTV.setText("");
-                        searchTV.setHint(R.string.secondaryHint);                    }
+                        searchTV.setHint(R.string.secondaryHint);
+                    }
                 }
             });
         }
 
     /////--------: These two things get bits of info from XkcdRetriever.java JSON and bring it to this activity :--------\\\\\
+    public void handleResponseNum(String responseNum) {
+        number = responseNum;
+        currentNumber.setText(number);
+    }
+
     @Override
     public void handleResponse(String response) {
         imageViewer = (ImageView) findViewById(R.id.imageViewer);
@@ -56,6 +76,22 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, altText, Toast.LENGTH_LONG).show();
+            }
+        });
+        prevButton.setVisibility(View.VISIBLE);
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bar1 = foo -1;
+                XkcdRetriever.getInstance(MainActivity.this).doRequest(bar1);
+            }
+        });
+        nextButton.setVisibility(View.VISIBLE);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bar2 = foo +1;
+                XkcdRetriever.getInstance(MainActivity.this).doRequest(bar2);
             }
         });
         Picasso.with(MainActivity.this).load(response).into(imageViewer);
@@ -75,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             imageViewer.setAdjustViewBounds(true);
             searchTV.setVisibility(View.INVISIBLE);
             searchButton.setVisibility(View.INVISIBLE);
+            prevButton.setVisibility(View.INVISIBLE);
+            nextButton.setVisibility(View.INVISIBLE);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             Log.e("On Config change", "PORTRAIT");
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imageViewer.getLayoutParams();
@@ -82,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             params.setMargins(45,45,45,45); // padding for left, top, right, bottom
             searchTV.setVisibility(View.VISIBLE);
             searchButton.setVisibility(View.VISIBLE);
+            prevButton.setVisibility(View.VISIBLE);
+            nextButton.setVisibility(View.VISIBLE);
             searchTV.setText("");
             searchTV.setHint(R.string.secondaryHint);
             imageViewer.setAdjustViewBounds(true);

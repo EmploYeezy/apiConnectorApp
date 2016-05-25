@@ -5,4 +5,6 @@
     <string name="searchButtonText">search</string>
     <string name="secondaryHint">Would you like another? Enter 1 - 1684</string>
     <string name="mockingToast">Wrong Number Chochy</string>
+    <string name="prevButton">Prev</string>
+    <string name="nextButton">next</string>
 </resources>

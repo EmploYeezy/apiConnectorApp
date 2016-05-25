@@ -37,6 +37,7 @@ public class XkcdRetriever {
                         try {
                             responseHandler.handleResponseAlt(response.getString("alt"));
                             responseHandler.handleResponse(response.getString("img"));
+                            responseHandler.handleResponseNum(response.getString("num"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -45,7 +46,8 @@ public class XkcdRetriever {
     }
 
     public interface ApiResponseHandler {
-        void handleResponse(String response);
         void handleResponseAlt(String response);
+        void handleResponse(String response);
+        void handleResponseNum(String response);
     }
 }

@@ -29,6 +29,32 @@
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:text="@string/searchButtonText"/>
 
+    <Button
+        android:id="@+id/prevButton"
+        android:layout_below="@id/searchTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:text="@string/prevButton" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:text="@string/nextButton"
+        android:layout_above="@+id/imageViewer"
+        android:layout_toEndOf="@+id/prevButton" />
+
+    <TextView
+        android:id="@+id/currentNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_above="@id/imageViewer"
+        android:layout_toEndOf="@id/nextButton"/>
+
     <ImageView
         android:id="@+id/imageViewer"
         android:layout_below="@id/searchbutton"
@@ -36,6 +62,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_height="900dp" />
+
+
 
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/fab"-->
