@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">ApiNytimesApp</string>
     <string name="action_settings">Settings</string>
-    <string name="searchTVHint">Enter a number from 1 to </string>
     <string name="searchButtonText">search</string>
     <string name="mockingToast">Wrong Number Chochy</string>
     <string name="prevButton">Prev</string>
     <string name="nextButton">next</string>
-    <string name="nextButtonToast">Too Big!</string>
+    <string name="nextButtonToast">Thats all there is. NO AND THEN!</string>
     <string name="prevButtonToast">Too Low!</string>
+    <string name="searchTVHing">"Search from 1 to "</string>
 </resources>

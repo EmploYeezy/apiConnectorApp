@@ -16,7 +16,7 @@
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/searchTVHint"/>
+        android:hint="@string/searchTVHing"/>
 
     <Button
         android:id="@+id/searchbutton"
@@ -62,8 +62,6 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_height="900dp" />
-
-
 
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/fab"-->

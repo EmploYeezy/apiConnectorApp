@@ -24,13 +24,12 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
     int bar3;
     int bar4;
     int counter;
-    private String biggestNumber;
     private String altText;
-    EditText searchTV;
-    ImageView imageViewer;
     Button searchButton;
     Button prevButton;
     Button nextButton;
+    EditText searchTV;
+    ImageView imageViewer;
     TextView currentNumber;
 
     @Override
@@ -41,9 +40,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         XkcdRetriever.getInstance(MainActivity.this).homeRequest();
 
             prevButton = (Button) findViewById(R.id.prevButton);
-            prevButton.setVisibility(View.INVISIBLE);
             nextButton = (Button) findViewById(R.id.nextButton);
-            nextButton.setVisibility(View.INVISIBLE);
             currentNumber = (TextView) findViewById(R.id.currentNumber);
 
         searchButton = (Button) findViewById(R.id.searchbutton);
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
                     } else {
                         XkcdRetriever.getInstance(MainActivity.this).doRequest(foo);
                         searchTV.setText("");
-                        searchTV.setHint("Enter a number from 1 to " + bar4);
+                        searchTV.setHint(getString(R.string.searchTVHing) + bar4);
                     }
                 }
             });
@@ -72,10 +69,10 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
         currentNumber.setClickable(false);
         bar3 = Integer.parseInt(responseNum);
         counter++;
-        if (counter == 1){
+        if (counter == 1) {
             bar4 = bar3;
         }
-        searchTV.setHint("Enter a number from 1 to " + bar4);
+        searchTV.setHint(getString(R.string.searchTVHing) + bar4);
     }
     @Override
     public void handleResponseImg(String response) {
@@ -141,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             nextButton.setVisibility(View.VISIBLE);
             currentNumber.setVisibility(View.VISIBLE);
             searchTV.setText("");
-            searchTV.setHint("Enter a number from 1 to " + biggestNumber);
+            searchTV.setHint(getString(R.string.searchTVHing) + bar4);
             imageViewer.setAdjustViewBounds(true);
         }
     }
