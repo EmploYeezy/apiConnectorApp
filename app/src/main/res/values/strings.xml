@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ApiNytimesApp</string>
+    <string name="app_name">XKCDviewer</string>
     <string name="action_settings">Settings</string>
     <string name="searchButtonText">search</string>
     <string name="mockingToast">Wrong Number Chochy</string>

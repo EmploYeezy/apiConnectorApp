@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements XkcdRetriever.ApiResponseHandler{
-
     int foo;
     int bar1;
     int bar2;
@@ -25,11 +24,17 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
     int bar4;
     int counter;
     private String altText;
+//    private PointF down = new PointF();
+//    private PointF up = new PointF();
+//    private long downTime;
+//    private long upTime;
+//    public static final int SWIPE_MIN_DISTANCE = 100;
+//    public static final int SWIPE_MAX_DURATION = 600;
     Button searchButton;
     Button prevButton;
     Button nextButton;
     EditText searchTV;
-    ImageView imageViewer;
+    static ImageView imageViewer;
     TextView currentNumber;
 
     @Override
@@ -108,11 +113,51 @@ public class MainActivity extends AppCompatActivity implements XkcdRetriever.Api
             }
         });
         Picasso.with(MainActivity.this).load(response).into(imageViewer);
+
     }
     @Override
     public void handleResponseAlt(String responseAlt) {
         altText = responseAlt;
     }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//
+//        switch(event.getAction()){
+//            case MotionEvent.ACTION_DOWN:
+//                //the beginning of the touch event
+//                down.set(event.getX(), event.getY());
+//                downTime = new Date().getTime();
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                //the end of the touch event
+//                up.set(event.getX(), event.getY());
+//                upTime = new Date().getTime();
+//
+//                //calculate the horizontal distance of the touch
+//                float distanceX = Math.abs(down.x - up.x);
+//                //calculate the vertical distance of the touch
+//                float distanceY = Math.abs(down.y - up.y);
+//                //calculate the duration of the touch (how long it took)
+//                float duration = upTime - downTime;
+//
+//                //break out of the switch if the distance was too short or the duration was too long (not a swipe).
+//                if((distanceX < SWIPE_MIN_DISTANCE && distanceY < SWIPE_MIN_DISTANCE) || duration > SWIPE_MAX_DURATION) break;
+//
+//                //compare the horizontal and vertical distances to determine which takes precedence.
+//                if(distanceX > distanceY) {
+//                    //horizontal
+//                    if (down.x > up.x) {
+//                        bar1 = bar3 - 1;
+//                        if (bar1 <= 0) {
+//                            Toast.makeText(MainActivity.this, R.string.prevButtonToast, Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                }
+//                break;
+//        }
+//        return true;
+//    }
 
     /////--------: This whole block of code just makes sure that the comic is displayed well :--------\\\\\
     @Override
