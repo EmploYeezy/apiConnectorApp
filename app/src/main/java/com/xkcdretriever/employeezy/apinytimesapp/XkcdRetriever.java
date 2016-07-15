@@ -1,4 +1,4 @@
-package com.example.employeezy.apinytimesapp;
+package com.xkcdretriever.employeezy.apinytimesapp;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;

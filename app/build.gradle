@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.example.employeezy.apinytimesapp"
+        applicationId "com.xkcdretriever.employeezy.apinytimesapp"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1

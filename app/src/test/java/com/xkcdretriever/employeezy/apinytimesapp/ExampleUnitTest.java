@@ -1,4 +1,4 @@
-package com.example.employeezy.apinytimesapp;
+package com.xkcdretriever.employeezy.apinytimesapp;
 
 import org.junit.Test;
 

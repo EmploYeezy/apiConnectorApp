@@ -1,4 +1,4 @@
-package com.example.employeezy.apinytimesapp;
+package com.xkcdretriever.employeezy.apinytimesapp;
 
 import android.content.Context;
 import android.content.res.Configuration;

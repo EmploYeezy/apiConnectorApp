@@ -1,4 +1,4 @@
-package com.example.employeezy.apinytimesapp;
+package com.xkcdretriever.employeezy.apinytimesapp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
